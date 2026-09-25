@@ -164,12 +164,12 @@ form input:focus, form select:focus { outline: 0; border-color: var(--brick); bo
 .disclaimer { max-width: 60em; }
 
 /* Modal */
-.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(10,20,34,.7); display: none; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; }
+.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(10,20,34,.7); display: none; align-items: center; justify-content: center; padding: 12px; overflow: hidden; }
 .modal-overlay.open { display: flex; }
-.modal { position: relative; width: min(440px, 100%); }
-.modal h3 { font-size: 1.8rem; padding-right: 1.5rem; }
-.modal-sub { color: var(--muted); font-size: .9rem; }
-.modal-close { position: absolute; top: 10px; right: 14px; background: none; border: 0; font-size: 2rem; line-height: 1; cursor: pointer; color: var(--muted); }
+.modal { position: relative; width: min(400px, 100%); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 22px 22px 20px; scrollbar-width: thin; }
+.modal h3 { font-size: 1.5rem; padding-right: 1.8rem; margin-bottom: .3em; }
+.modal-sub { color: var(--muted); font-size: .85rem; margin-bottom: .4em; }
+.modal-close { position: sticky; float: right; top: 0; margin: -10px -8px 0 0; z-index: 2; background: #fff; width: 32px; height: 32px; border-radius: 50%; background: none; border: 0; font-size: 2rem; line-height: 1; cursor: pointer; color: var(--muted); }
 
 /* Sticky + back to top */
 .sticky-bar { display: none; }
@@ -263,3 +263,16 @@ picture { display: contents; }
 .hub-title { font-weight: 600; color: var(--navy); margin-bottom: .5rem; }
 .hub-links ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .hub-links a { font-size: .9rem; font-weight: 500; }
+
+/* Compact enquiry popup: tighter fields, scrolls inside when the screen is short */
+.modal form label { margin: .65em 0 .2em; font-size: .78rem; }
+.modal form input, .modal form select { padding: .6em .8em; font-size: .92rem; }
+.modal .btn-block { margin-top: .9em; padding: .75em 1em; }
+.modal::-webkit-scrollbar { width: 6px; }
+.modal::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+@media (max-height: 640px), (max-width: 380px) {
+  .modal { padding: 16px 16px 14px; }
+  .modal h3 { font-size: 1.3rem; }
+  .modal-sub { display: none; }
+  .modal form label { margin: .5em 0 .15em; }
+}

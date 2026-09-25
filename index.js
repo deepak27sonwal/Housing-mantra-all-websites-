@@ -214,11 +214,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* Auto-open the popup once, 10 seconds after page load */
+  /* Auto-open the popup ONCE, 15 seconds after the page loads (or is
+     refreshed). It never re-opens by itself: if the visitor already
+     opened or closed it, or is typing in a form, it stays away. */
+  var AUTO_OPEN_DELAY_MS = 15000;
   window.setTimeout(function () {
-    if (modalOverlay && !modalOverlay.classList.contains('open')) {
+    var a = document.activeElement;
+    var typing = a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName);
+    if (modalOverlay && !modalOverlay.classList.contains('open') && !typing) {
       openModal();
     }
-  }, 10000);
+  }, AUTO_OPEN_DELAY_MS);
 
 });
